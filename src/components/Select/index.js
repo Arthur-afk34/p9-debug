@@ -15,10 +15,17 @@ const Select = ({
 }) => {
   const [value, setValue] = useState();
   const [collapsed, setCollapsed] = useState(true);
+
+// Ajoute un console.log pour vérifier la valeur de selection
+// console.log("Selection in Select component123:", selection);
+
   const changeValue = (newValue) => {
     onChange();
     setValue(newValue);
     setCollapsed(newValue);
+    setCollapsed(true);
+    onChange(newValue);
+// console.log(newValue); // permet de tester le retour de la sélection au click et de le nouvelle valeur.  OK
   };
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">
@@ -88,7 +95,7 @@ Select.propTypes = {
   titleEmpty: PropTypes.bool,
   label: PropTypes.string,
   type: PropTypes.string,
-}
+};
 
 Select.defaultProps = {
   onChange: () => null,
@@ -96,6 +103,6 @@ Select.defaultProps = {
   label: "",
   type: "normal",
   name: "select",
-}
+};
 
 export default Select;
