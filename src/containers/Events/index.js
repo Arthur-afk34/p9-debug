@@ -14,37 +14,48 @@ const EventList = () => {
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
 
-
   // console.log("Selected Type:", type); //  OK
   const filteredEvents = data?.events
-  .filter((event) => {
-    // bout de code manquant pour les filtres
-    if (!type || event.type === type) {
-      return true;
-    }
-    return false;
-  })
-  .filter((event, index) => {
-    // console.log("filteredEvents after filtering:", filteredEvents); OK
+    .filter((event) => {
+      // bout de code manquant pour les filtres
+      if (!type || event.type === type) {
+        return true;
+      }
+      return false;
+    })
+    .filter((event, index) => {
+      // console.log("filteredEvents after filtering:", filteredEvents); OK
       // console.log("currentPage:", currentPage); // permet de controler l'état de la page OK
       // console.log("PER_PAGE:", PER_PAGE); // permet de controler le nbr d element par page OK
       // console.log("index:", index); // permet de controler le nombre d'index  OK
-    if (
-      
-      (currentPage - 1) * PER_PAGE <= index &&
-      PER_PAGE * currentPage > index 
-    ) {
-      return true;
-    }
-    return false;
-  });
 
-
+      if (
+        (currentPage - 1) * PER_PAGE <= index &&
+        PER_PAGE * currentPage > index
+      ) {
+        return true;
+      }
+      return false;
+    });
+  // console.log("Filtered Events Length:", filteredEvents.length);    OK
 
   const changeType = (evtType) => {
+    // console.log("Changing type to:", evtType);     OK
     setCurrentPage(1);
+    //  Utilisez setTimeout pour vérifier la valeur après un court délai  OK
+    //  setTimeout(() => {
+    //   console.log("currentPage after setCurrentPage:", currentPage);
+    //  }, 100);  Attendez 100 ms pour laisser le temps à l'état d'être mis à jour.    OK
+
     setType(evtType);
+
+    // console.log("Changing type to:", evtType);        OK
   };
+
+  // useEffect(() => {
+  //   console.log("currentPage after setCurrentPage:", currentPage);     OK
+  //  }, [currentPage]);
+
   const pageNumber = Math.floor((filteredEvents?.length || 0) / PER_PAGE) + 1;
   const typeList = new Set(data?.events.map((event) => event.type));
   return (
@@ -66,7 +77,7 @@ const EventList = () => {
               <Modal key={event.id} Content={<ModalEvent event={event} />}>
                 {({ setIsOpened }) => (
                   <EventCard
-                    onClick={() => setIsOpened(true)}
+                    onClick={() => setIsOpened(true)}    
                     imageSrc={event.cover}
                     title={event.title}
                     date={new Date(event.date)}

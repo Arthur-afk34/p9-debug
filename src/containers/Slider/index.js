@@ -4,33 +4,36 @@ import { getMonth } from "../../helpers/Date";
 
 import "./style.scss";
 
-const Slider = () => {
+export const getSortedData = () => {
   const { data } = useData();
-  const [index, setIndex] = useState(0);
-  const byDateDesc = data?.focus.sort((evtA, evtB) =>
+
+  return data?.focus.sort((evtA, evtB) =>
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
   );
+};
+
+const Slider = () => {
+  const [index, setIndex] = useState(0);
+
+  const byDateDesc = getSortedData();
+
   const nextCard = () => {
-    setTimeout(
-      () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0), // incrémentation de-1 oublié a index < byDateDesc.length -1
-      5000
-    );
+    setTimeout(() => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0), 5000);
   };
 
-  const handleRadioChange = (newIndex) => {
-    setIndex(newIndex);
-  };
+ // ajout de la fonction  handleRadioChange pour gérer le changement de radio
+ const handleRadioChange = (newIndex) => {
+  setIndex(newIndex);
+};
 
   useEffect(() => {
     nextCard();
   });
+
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <div key={event.id} 
-          className={`SlideCard SlideCard--${
-            index === idx ? "display" : "hide"
-          }`}>
+        <div key={event.id} className={`SlideCard SlideCard--${index === idx ? "display" : "hide"}`}>
           <img src={event.cover} alt="forum" />
           <div className="SlideCard__descriptionContainer">
             <div className="SlideCard__description">

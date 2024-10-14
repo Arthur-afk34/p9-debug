@@ -12,15 +12,16 @@ const Select = ({
   titleEmpty,
   label,
   type = "normal",
+  
 }) => {
   const [value, setValue] = useState();
   const [collapsed, setCollapsed] = useState(true);
 
-// Ajoute un console.log pour vérifier la valeur de selection
-// console.log("Selection in Select component123:", selection);
+ // Ajoute un console.log pour vérifier la valeur de selection               OK
+ // console.log("Selection in Select component123:", selection);
 
   const changeValue = (newValue) => {
-    onChange();
+    onChange(); // oubli de newValue pour transmettre la nouvelle valeur
     setValue(newValue);
     setCollapsed(newValue);
     setCollapsed(true);

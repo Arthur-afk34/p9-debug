@@ -21,7 +21,7 @@ export const DataProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
   const [last, setLast] = useState(null);
-  
+
   const getData = useCallback(async () => {
     try {
       const jsonData = await api.loadData();
@@ -39,14 +39,16 @@ export const DataProvider = ({ children }) => {
       getData();
     }
   }, [data]);
+
   const contextValue = useMemo(
     () => ({ data, error, last }),
     [data, error, last]
   );
-  // Vérifie si data n'est pas null avant de fournir les données
-  if (data === null) {
-    return <div>Loading...</div>;
-  }
+ // Vérifie si data n'est pas null avant de fournir les données
+ if (data === null) {
+  return <div>Loading...</div>;
+}
+
   return (
     <DataContext.Provider value={contextValue}>{children}</DataContext.Provider>
   );
@@ -54,7 +56,7 @@ export const DataProvider = ({ children }) => {
 
 DataProvider.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
 export const useData = () => useContext(DataContext);
 
