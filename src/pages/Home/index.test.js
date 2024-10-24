@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react"; //ajoute waitFor permet d'écrire des tests qui traitent des actions asynchrones en attendant un callback
 import Home from "./index";
 
 describe("When Form is created", () => {
@@ -13,6 +13,7 @@ describe("When Form is created", () => {
   describe("and a click is triggered on the submit button", () => {
     it("the success message is displayed", async () => {
       render(<Home />);
+      // change le code 
       fireEvent.click(screen.getByText("Envoyer"));
       
       

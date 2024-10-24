@@ -18,7 +18,8 @@ const Slider = () => {
 
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
   new Date(evtA.date).getTime() > new Date(evtB.date).getTime() ? 1 : -1
-);
+); 
+// console.log(byDateDesc); // console.log(byDateDesc[0].date); // console.log(getMonth(new Date(byDateDesc[0].date))); 
 
   useEffect(() => {
     if (byDateDesc && byDateDesc.length > 0) {
@@ -57,7 +58,7 @@ const Slider = () => {
                 key={event.id} 
                 type="radio"
                 name="radio-button"
-                checked={index === radioIdx}
+                defaultChecked={index === radioIdx}
               />
             ))}
           </div>
